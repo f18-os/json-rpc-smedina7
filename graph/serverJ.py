@@ -16,7 +16,7 @@ class ServerServices(object):
 
     @request
     def swapper(self, txt):
-        return json.decoder(''.join(reversed(list(txt))))
+        return json.loads(''.join(reversed(list(txt))))
 
     @request
     def nop(self, txt):

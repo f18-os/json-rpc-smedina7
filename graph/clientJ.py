@@ -25,7 +25,7 @@ root = node("root", [leaf1, leaf1, leaf2])
 # Execute in server:
 # result = server.swapper('Hello World!')
 assert isinstance(root, object)
-result = server.swapper(json.encoder(root))
+result = server.swapper(json.dumps(root))
 
 # "!dlroW olleH"
 print(result)
