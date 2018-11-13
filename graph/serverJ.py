@@ -2,6 +2,7 @@
 # https://github.com/seprich/py-bson-rpc/blob/master/README.md#quickstart
 
 import socket
+import json
 from bsonrpc import JSONRpc
 from bsonrpc import request, service_class
 from bsonrpc.exceptions import FramingError
@@ -15,7 +16,7 @@ class ServerServices(object):
 
     @request
     def swapper(self, txt):
-        return ''.join(reversed(list(txt)))
+        return json.decoder(''.join(reversed(list(txt))))
 
     @request
     def nop(self, txt):

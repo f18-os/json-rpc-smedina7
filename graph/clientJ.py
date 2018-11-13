@@ -2,6 +2,8 @@
 # https://github.com/seprich/py-bson-rpc/blob/master/README.md#quickstart
 
 import socket
+import json
+import node
 from bsonrpc import JSONRpc
 from bsonrpc.exceptions import FramingError
 from bsonrpc.framing import (
@@ -13,11 +15,21 @@ s.connect(('localhost', 50001))
 
 rpc = JSONRpc(s, framing_cls=JSONFramingNone)
 server = rpc.get_peer_proxy()
+
+from node import *
+
+leaf1 = node("leaf1")
+leaf2 = node("leaf2")
+root = node("root", [leaf1, leaf1, leaf2])
+
 # Execute in server:
-result = server.swapper('Hello World!')
+# result = server.swapper('Hello World!')
+assert isinstance(root, object)
+result = server.swapper(json.encoder(root))
+
 # "!dlroW olleH"
 print(result)
 
-print(server.nop({1: [2, 3]}))
+# print(server.nop({1: [2, 3]}))
 
 rpc.close()  # Closes the socket 's' also
